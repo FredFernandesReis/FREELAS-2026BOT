@@ -1,0 +1,489 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel - Freelancer BH</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f5f7;
+            color: #252525;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 245px;
+            background: #171717;
+            color: white;
+            padding: 28px 18px;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            color: #ff821c;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 38px;
+        }
+
+        .menu-title {
+            color: #999;
+            font-size: 11px;
+            margin: 25px 10px 12px;
+            text-transform: uppercase;
+        }
+
+        .menu a {
+            display: block;
+            padding: 13px 12px;
+            color: #ddd;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .menu a.active,
+        .menu a:hover {
+            background: #ff821c;
+            color: white;
+        }
+
+        .main {
+            flex: 1;
+            padding: 30px;
+            min-width: 0;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .topbar h1 {
+            font-size: 25px;
+        }
+
+        .topbar p {
+            color: #777;
+            margin-top: 6px;
+            font-size: 14px;
+        }
+
+        .admin-link {
+            background: #171717;
+            color: white;
+            text-decoration: none;
+            padding: 11px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px #00000008;
+        }
+
+        .card span {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .card h2 {
+            font-size: 29px;
+            margin-top: 12px;
+        }
+
+        .card small {
+            display: block;
+            color: #999;
+            margin-top: 8px;
+        }
+
+        .orange {
+            border-left: 4px solid #ff821c;
+        }
+
+        .green {
+            border-left: 4px solid #20a464;
+        }
+
+        .blue {
+            border-left: 4px solid #3884d8;
+        }
+
+        .purple {
+            border-left: 4px solid #9061d5;
+        }
+
+        .section {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px #00000008;
+        }
+
+        .section h3 {
+            font-size: 17px;
+            margin-bottom: 20px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 650px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 14px 12px;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+        }
+
+        th {
+            color: #777;
+            font-weight: 600;
+            background: #fafafa;
+        }
+
+        td {
+            color: #444;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 11px;
+            background: #eee;
+        }
+
+        .status.ativa,
+        .status.aprovado {
+            background: #e2f7eb;
+            color: #16834c;
+        }
+
+        .status.pendente {
+            background: #fff1dc;
+            color: #b87514;
+        }
+
+        .status.cancelada,
+        .status.expirada,
+        .status.recusado,
+        .status.chargeback,
+        .status.reembolsada,
+        .status.reembolsado {
+            background: #ffe6e6;
+            color: #c43c3c;
+        }
+
+        .empty {
+            color: #999;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        @media (max-width: 1000px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .layout {
+                display: block;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 18px;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .menu-title {
+                display: none;
+            }
+
+            .menu {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+
+            .menu a {
+                margin: 0;
+                padding: 10px;
+            }
+
+            .main {
+                padding: 20px 14px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            .card h2 {
+                font-size: 23px;
+            }
+
+            .topbar h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+        <div class="logo">FREELANCER BH</div>
+
+        <div class="menu-title">Principal</div>
+
+        <nav class="menu">
+            <a href="{% url 'painel:dashboard' %}" class="active">
+                Visão geral
+            </a>
+
+            <a href="/admin/clientes/cliente/">
+                Clientes
+            </a>
+
+            <a href="/admin/assinaturas/assinatura/">
+                Assinaturas
+            </a>
+
+            <a href="/admin/assinaturas/pagamento/">
+                Pagamentos
+            </a>
+
+            <a href="/admin/">
+                Administração
+            </a>
+        </nav>
+
+    </aside>
+
+    <main class="main">
+
+        <header class="topbar">
+            <div>
+                <h1>Painel administrativo</h1>
+                <p>Acompanhe seus clientes e assinaturas.</p>
+            </div>
+
+            <a class="admin-link" href="/admin/">
+                Django Admin
+            </a>
+        </header>
+
+        <section class="cards">
+
+            <div class="card orange">
+                <span>Total de clientes</span>
+                <h2>{{ total_clientes }}</h2>
+                <small>Clientes cadastrados</small>
+            </div>
+
+            <div class="card green">
+                <span>Assinaturas ativas</span>
+                <h2>{{ assinaturas_ativas }}</h2>
+                <small>Com status ATIVA</small>
+            </div>
+
+            <div class="card blue">
+                <span>Assinaturas pendentes</span>
+                <h2>{{ assinaturas_pendentes }}</h2>
+                <small>Aguardando aprovação</small>
+            </div>
+
+            <div class="card purple">
+                <span>Pagamentos aprovados</span>
+                <h2>{{ pagamentos_aprovados }}</h2>
+                <small>De {{ total_pagamentos }} pagamentos registrados</small>
+            </div>
+
+        </section>
+
+        <section class="section">
+
+            <h3>Últimos clientes cadastrados</h3>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Telegram</th>
+                            <th>E-mail</th>
+                            <th>Administrador</th>
+                            <th>Cadastro</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for cliente in ultimos_clientes %}
+                        <tr>
+                            <td>{{ cliente.nome|default:"Não informado" }}</td>
+                            <td>{{ cliente.telegram_id }}</td>
+                            <td>{{ cliente.email|default:"Não informado" }}</td>
+                            <td>{{ cliente.get_administrador_display|default:"Não informado" }}</td>
+                            <td>{{ cliente.criado_em|date:"d/m/Y H:i" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="empty">
+                                Nenhum cliente cadastrado ainda.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <section class="section">
+
+            <h3>Últimas assinaturas</h3>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Administrador</th>
+                            <th>Valor</th>
+                            <th>Status</th>
+                            <th>Vencimento</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for assinatura in ultimas_assinaturas %}
+                        <tr>
+                            <td>{{ assinatura.cliente.nome|default:"Não informado" }}</td>
+                            <td>{{ assinatura.get_administrador_display|default:assinatura.administrador|default:"-" }}</td>
+                            <td>R$ {{ assinatura.valor }}</td>
+                            <td>
+                                <span class="status {{ assinatura.status|lower }}">
+                                    {{ assinatura.get_status_display }}
+                                </span>
+                            </td>
+                            <td>
+                                {% if assinatura.vencimento %}
+                                    {{ assinatura.vencimento|date:"d/m/Y" }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="empty">
+                                Nenhuma assinatura registrada.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <section class="section">
+
+            <h3>Últimos pagamentos</h3>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Valor</th>
+                            <th>Status</th>
+                            <th>Método</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for pagamento in ultimos_pagamentos %}
+                        <tr>
+                            <td>{{ pagamento.assinatura.cliente.nome|default:"Não informado" }}</td>
+                            <td>R$ {{ pagamento.valor }}</td>
+                            <td>
+                                <span class="status {{ pagamento.status|lower }}">
+                                    {{ pagamento.get_status_display }}
+                                </span>
+                            </td>
+                            <td>{{ pagamento.metodo|default:"-" }}</td>
+                            <td>{{ pagamento.criado_em|date:"d/m/Y H:i" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="empty">
+                                Nenhum pagamento registrado.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
